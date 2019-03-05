@@ -1,0 +1,21 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.empList {
+  margin-right: 10px;
+}
+
+.active-link {
+  background-color: #ff4081;
+}

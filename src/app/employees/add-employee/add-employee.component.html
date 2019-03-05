@@ -1,0 +1,37 @@
+
+<mat-card>
+  <form (submit)="onSaveEmployee(employeeDataForm)" #employeeDataForm="ngForm">
+    <mat-form-field >
+      <input
+       matInput
+       placeholder="Name"
+       name="employeeName"
+       [ngModel]="employeeData?.name"
+       required>
+    </mat-form-field>
+
+    <mat-form-field >
+        <input
+         matInput
+         placeholder="Email"
+         name="email"
+         [ngModel]="employeeData?.email"
+         required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+       matInput
+       placeholder="Base Pay"
+       name="basePay"
+       [ngModel]="employeeData?.basePay"
+       required>
+    </mat-form-field>
+
+    <button
+     mat-raised-button
+     color="accent"
+     type="submit">Save</button>
+  </form>
+</mat-card>
+

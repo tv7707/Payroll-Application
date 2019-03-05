@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span>
+    Payroll Application
+  </span>
+  <span class="fill-space"></span>
+  <p class="empList" color="primary">
+    <a
+      mat-raised-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >View Employee</a
+    >
+  </p>
+  <p class="addEmp" color="primary">
+    <a mat-raised-button routerLink="/add" routerLinkActive="active-link"
+      >Add Employee
+    </a>
+  </p>
+</mat-toolbar>

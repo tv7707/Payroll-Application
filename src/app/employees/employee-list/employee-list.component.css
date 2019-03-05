@@ -1,0 +1,12 @@
+:host{
+  display: block;
+  margin-top: 15px;
+}
+
+
+table {
+  width: 100%;
+}
+.action {
+  padding-left: 25px;
+}

@@ -1,0 +1,126 @@
+<!-- <mat-card>
+  <mat-panel-title
+    ><h2>Deductions For - {{ employeeData.name }}</h2></mat-panel-title
+  >
+  <mat-card-content>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Deductions Type"
+        required
+        disabled
+        name="deduction"
+        [ngModel]="salaryData?.deductions"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Amount"
+        required
+        disabled
+        name="amount"
+        [ngModel]="salaryData?.deductionAmount"
+      />
+    </mat-form-field>
+  </mat-card-content>
+  <form (submit)="onSaveSalary(salaryDataForm)" #salaryDataForm="ngForm">
+    <mat-card-content>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Deduction Type"
+          required
+          name="deductions"
+          ngModel
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Amount" required name="amount" ngModel />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" type="submit">Save</button>
+    </mat-card-actions>
+  </form>
+</mat-card>
+<hr />
+<mat-card>
+  <div>
+    <p>Base Pay : {{ employeeData.basePay }}</p>
+    <p>Total Deduction : {{ totalDeduction }}</p>
+    <p>Take Home Pay: {{ grosspay }}</p>
+  </mat-form-field>
+</mat-card> -->
+
+<mat-card>
+    <form [formGroup] = "salaryForm" (ngSubmit)="onSaveSalary()">
+      <div formArrayName="deductions">
+        <div *ngFor="let ingControl of getControl(); let i = index" [formGroupName]="i">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Deduction Type"
+              type="text"
+              id="type"
+              formControlName="type">
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Amount"
+              type="number"
+              id="amount"
+              formControlName="amount">
+          </mat-form-field>
+          <mat-card-actions *ngIf="i > 0">
+            <button mat-button type="button" (click)="onDeleteDeductions(i)">
+              <mat-icon color="primary">clear</mat-icon>
+            </button>
+          </mat-card-actions>
+          <mat-card-actions>
+            <button mat-button type="button" (click)="onAddDeductions()">
+                <mat-icon color="primary">add</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </div>
+      <mat-card-actions>
+          <button
+            mat-button
+            type="submit"
+            [disabled]="salaryForm?.invalid">
+            Save
+          </button>
+       </mat-card-actions>
+    </form>
+    </mat-card>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Base pay Column-->
+  <ng-container matColumnDef="basePay">
+      <th mat-header-cell *matHeaderCellDef> Base Pay </th>
+      <td mat-cell *matCellDef="let salaryDeduction"> {{salaryDeduction.basePay}} </td>
+  </ng-container>
+  <!-- Deduction Type Column -->
+  <ng-container matColumnDef="deductionType">
+    <th mat-header-cell *matHeaderCellDef> Deduction Type </th>
+    <td mat-cell *matCellDef="let salaryDeduction"> {{salaryDeduction.deductionType}} </td>
+  </ng-container>
+
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let salaryDeduction"> {{salaryDeduction.amount}} </td>
+  </ng-container>
+
+   <!-- Take Home Pay Column -->
+   <ng-container matColumnDef="netPay">
+    <th mat-header-cell *matHeaderCellDef> Take Home Pay </th>
+    <td mat-cell *matCellDef="let salaryDeduction"> {{salaryDeduction.netPay}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
